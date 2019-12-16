@@ -1,0 +1,28 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: k8s-node-drainer
+  namespace: kube-system
+spec:
+  schedule: "*/30 6-14 * * 1-5" # only run during office hours
+  successfulJobsHistoryLimit: 10
+  failedJobsHistoryLimit: 10
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: k8s-node-drainer
+          restartPolicy: Never
+          containers:
+          - name: k8s-node-drainer
+            image: logmein/k8s-node-drainer:0.1
+            command: [python, main.py]
+            args: [
+              # add args here
+            ]
+            resources:
+              limits:
+                memory: 100Mi
+              requests:
+                cpu: 5m
+                memory: 100Mi

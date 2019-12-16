@@ -1,0 +1,4 @@
+kubernetes
+humanfriendly
+requests
+requests_mock
