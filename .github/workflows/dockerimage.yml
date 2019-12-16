@@ -10,12 +10,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - name: test the secret
-      run: echo ${{ secrets.TEST1 }} | wc -l 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag logmein/k8s-node-drainer:$(date +%s)
     - name: Login to DockerHub Registry
-      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+      run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USER }} --password-stdin
     - name: Publish the Docker Image
       run: docker push --tag logmein/k8s-node-drainer:$(date +%s)
     - name: Logot of the DockerHub Registry
