@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - name: test the secret
-      run: echo ${{ secrest.TEST1 }} | wc -l 
+      run: echo ${{ secrets.TEST1 }} | wc -l 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag logmein/k8s-node-drainer:$(date +%s)
     - name: Login to DockerHub Registry
