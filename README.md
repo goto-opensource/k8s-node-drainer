@@ -1,6 +1,6 @@
 # k8s-node-drainer
 
-**Warning:** We are still in the processing of publishing this project. There might still be some glitches from making it "nice" for open-sourcing and the docker image is not pushed yet. **Do not consider this project production-ready yet.** However, feel free to take a look, try it out and even contribute!
+**Warning:** We are still in the processing of publishing this project. There might still be some glitches from making it "nice" for open-sourcing and the docker image is not versioned yet. **Do not consider this project production-ready yet.** However, feel free to take a look, try it out and even contribute!
 
 `CronJob` for Kubernetes that drains old (cloud-based) worker nodes so that they can be removed, e.g. by the Kubernetes [cluster-autoscaler](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler).
 

@@ -15,7 +15,7 @@ spec:
           restartPolicy: Never
           containers:
           - name: k8s-node-drainer
-            image: logmein/k8s-node-drainer:0.1
+            image: logmein/k8s-node-drainer:latest
             command: [python, main.py]
             args: [
               # add args here
