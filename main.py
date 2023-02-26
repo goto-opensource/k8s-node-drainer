@@ -21,6 +21,9 @@ def parse_args(argv=sys.argv[1:]):
     p.add_argument('--nodes', default=None, nargs='+', type=str, metavar='NODE',
                    help='act on the given nodes only')
 
+
+    p.add_argument('--exclude-nodes-with-annotation', default=None, type=str,
+                   help='exclude nodes which has this annotation')
     p.add_argument('--cordon-nodes-after', default='30d',
                    help='cordon nodes as old after they have been up for the given amount of time')
     p.add_argument('--notify-after', default='1d',
@@ -252,6 +255,7 @@ def drain_node(v1, node: client.V1Node, all_pods: List[client.V1Pod], args):
 
 def run():
     args = parse_args()
+    
 
     try:
         config.load_kube_config()
@@ -264,6 +268,8 @@ def run():
     all_nodes = v1.list_node().items
     if args.nodes is not None:
         all_nodes = [node for node in all_nodes if node.metadata.name in args.nodes]
+    if args.exclude_nodes_with_annotation is not None:
+        all_nodes = [node for node in all_nodes if args.exclude_nodes_with_annotation not in node.metadata.annotations]
 
     all_namespaces = v1.list_namespace().items
     all_pods = [
@@ -293,3 +299,4 @@ def run():
 
 if __name__ == "__main__":
     run()
+
